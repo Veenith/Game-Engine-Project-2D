@@ -50,10 +50,11 @@ namespace EllixEngine
         {
             Ellix gameEngine = new Ellix();
             gameEngine.Init();
-            while (gameEngine.checkWindowOpen()) {
+            //while (gameEngine.checkWindowOpen()) {
                 gameEngine.renderFrame();
                 gameEngine.getInput();
-            }
+            Console.ReadLine();
+            //}
         }
     }
 }
