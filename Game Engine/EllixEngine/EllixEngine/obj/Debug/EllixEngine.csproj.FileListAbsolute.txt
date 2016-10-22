@@ -6,6 +6,9 @@ D:\Data\Programming\Game project\Game-Engine-Project-2D\Game Engine\EllixEngine\
 D:\Data\Programming\Game project\Game-Engine-Project-2D\Game Engine\EllixEngine\EllixEngine\bin\Debug\sfmlnet-graphics-2.dll
 D:\Data\Programming\Game project\Game-Engine-Project-2D\Game Engine\EllixEngine\EllixEngine\bin\Debug\sfmlnet-system-2.dll
 D:\Data\Programming\Game project\Game-Engine-Project-2D\Game Engine\EllixEngine\EllixEngine\bin\Debug\sfmlnet-window-2.dll
-D:\Data\Programming\Game project\Game-Engine-Project-2D\Game Engine\EllixEngine\EllixEngine\obj\Debug\EllixEngine.csprojResolveAssemblyReference.cache
 D:\Data\Programming\Game project\Game-Engine-Project-2D\Game Engine\EllixEngine\EllixEngine\obj\Debug\EllixEngine.exe
 D:\Data\Programming\Game project\Game-Engine-Project-2D\Game Engine\EllixEngine\EllixEngine\obj\Debug\EllixEngine.pdb
+D:\Data\Programming\Game project\Game-Engine-Project-2D\Game Engine\EllixEngine\EllixEngine\bin\Debug\csfml-audio-2.dll
+D:\Data\Programming\Game project\Game-Engine-Project-2D\Game Engine\EllixEngine\EllixEngine\bin\Debug\csfml-graphics-2.dll
+D:\Data\Programming\Game project\Game-Engine-Project-2D\Game Engine\EllixEngine\EllixEngine\bin\Debug\csfml-system-2.dll
+D:\Data\Programming\Game project\Game-Engine-Project-2D\Game Engine\EllixEngine\EllixEngine\bin\Debug\csfml-window-2.dll

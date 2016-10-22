@@ -1,0 +1,13 @@
+D:\Data\Programming\Game project\Game-Engine-Project-2D\Game Engine\EllixEngine\EllixEngine\bin\x64\Debug\EllixEngine.exe.config
+D:\Data\Programming\Game project\Game-Engine-Project-2D\Game Engine\EllixEngine\EllixEngine\bin\x64\Debug\csfml-audio-2.dll
+D:\Data\Programming\Game project\Game-Engine-Project-2D\Game Engine\EllixEngine\EllixEngine\bin\x64\Debug\csfml-graphics-2.dll
+D:\Data\Programming\Game project\Game-Engine-Project-2D\Game Engine\EllixEngine\EllixEngine\bin\x64\Debug\csfml-system-2.dll
+D:\Data\Programming\Game project\Game-Engine-Project-2D\Game Engine\EllixEngine\EllixEngine\bin\x64\Debug\csfml-window-2.dll
+D:\Data\Programming\Game project\Game-Engine-Project-2D\Game Engine\EllixEngine\EllixEngine\bin\x64\Debug\EllixEngine.exe
+D:\Data\Programming\Game project\Game-Engine-Project-2D\Game Engine\EllixEngine\EllixEngine\bin\x64\Debug\EllixEngine.pdb
+D:\Data\Programming\Game project\Game-Engine-Project-2D\Game Engine\EllixEngine\EllixEngine\bin\x64\Debug\sfmlnet-audio-2.dll
+D:\Data\Programming\Game project\Game-Engine-Project-2D\Game Engine\EllixEngine\EllixEngine\bin\x64\Debug\sfmlnet-graphics-2.dll
+D:\Data\Programming\Game project\Game-Engine-Project-2D\Game Engine\EllixEngine\EllixEngine\bin\x64\Debug\sfmlnet-system-2.dll
+D:\Data\Programming\Game project\Game-Engine-Project-2D\Game Engine\EllixEngine\EllixEngine\bin\x64\Debug\sfmlnet-window-2.dll
+D:\Data\Programming\Game project\Game-Engine-Project-2D\Game Engine\EllixEngine\EllixEngine\obj\x64\Debug\EllixEngine.exe
+D:\Data\Programming\Game project\Game-Engine-Project-2D\Game Engine\EllixEngine\EllixEngine\obj\x64\Debug\EllixEngine.pdb

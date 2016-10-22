@@ -13,6 +13,8 @@ namespace EllixEngine
     {
         static void Main(string[] args)
         {
+            RenderWindow window = new RenderWindow(new VideoMode(1080, 760), "test", Styles.Default);
+            window.Display();
         }
     }
 }
