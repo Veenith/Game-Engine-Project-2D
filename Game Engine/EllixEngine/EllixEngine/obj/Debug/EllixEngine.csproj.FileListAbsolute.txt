@@ -12,3 +12,5 @@ D:\Data\Programming\Game project\Game-Engine-Project-2D\Game Engine\EllixEngine\
 D:\Data\Programming\Game project\Game-Engine-Project-2D\Game Engine\EllixEngine\EllixEngine\bin\Debug\csfml-graphics-2.dll
 D:\Data\Programming\Game project\Game-Engine-Project-2D\Game Engine\EllixEngine\EllixEngine\bin\Debug\csfml-system-2.dll
 D:\Data\Programming\Game project\Game-Engine-Project-2D\Game Engine\EllixEngine\EllixEngine\bin\Debug\csfml-window-2.dll
+C:\Danh\Software Developed\Game-Engine-Project-2D\Game Engine\EllixEngine\EllixEngine\obj\Debug\EllixEngine.exe
+C:\Danh\Software Developed\Game-Engine-Project-2D\Game Engine\EllixEngine\EllixEngine\obj\Debug\EllixEngine.pdb
