@@ -9,7 +9,8 @@ namespace EllixEngine
 {
     class GameObject
     {
-        public SFML.System.Vector2f position = new SFML.System.Vector2f(0, 0), scale = new SFML.System.Vector2f(1, 1);
+        public SFML.System.Vector2f position = new SFML.System.Vector2f(0, 0);
+        public SFML.System.Vector2f scale = new SFML.System.Vector2f(1, 1);
         public Image Img { get; private set; }
         public bool ImageExists { get; private set; }
         public bool Visible = true, Fixed = true, CompositeRender = false;

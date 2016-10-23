@@ -13,30 +13,40 @@ namespace EllixEngine
     {
         Renderer gameRender;
         RenderWindow gameWindow;
-        public void Init() {
+        
+        public void Init(String windowTitle,uint ResWidth,uint ResHeight) {
             gameRender = new Renderer();
-            gameWindow = gameRender.init();
+            gameWindow = gameRender.init(windowTitle,ResWidth,ResHeight);
             //Input
             gameWindow.Closed += new EventHandler(OnClose);
             gameWindow.KeyPressed += new EventHandler<KeyEventArgs>(KeyPressed);
+            gameWindow.Resized += new EventHandler<SizeEventArgs>(Resized);
         }
         //Input methods
-        void KeyPressed(object sender,KeyEventArgs e)
+        void KeyPressed(object sender, KeyEventArgs e)
         {
             if (e.Code == Keyboard.Key.Escape) {
                 gameWindow.Close();
             }
         }
-        public bool checkWindowOpen() {
-            return gameWindow.IsOpen;
+        
+
+        public void Resized(object sender,SizeEventArgs resize)
+        {
+            gameWindow.SetView(new View(((SFML.System.Vector2f) gameWindow.Size) / 2,(SFML.System.Vector2f) gameWindow.Size));
         }
 
         void OnClose(object sender, EventArgs e)
         {
             // Close the window when OnClose event is received
-            RenderWindow window = (RenderWindow) sender;
+            RenderWindow window = (RenderWindow)sender;
             window.Close();
         }
+
+        public bool checkWindowOpen() {
+            return gameWindow.IsOpen;
+        }
+
         //GameEngine Methods
         public void renderFrame() {
             gameRender.frame(gameWindow);
@@ -59,11 +69,16 @@ namespace EllixEngine
         static void Main(string[] args)
         {
             Ellix gameEngine = new Ellix();
-            gameEngine.Init();
+            gameEngine.Init("Powered By Ellix",960,540);
 
             GameObject obj1 = new GameObject();
-            obj1.setImage("D:\\Untitled.png");
+            obj1.setImage("C:\\Users\\Danh\\Downloads\\Pokemon_Go.png");
             gameEngine.registerObject(obj1);
+            obj1.scale = new SFML.System.Vector2f(1f, 1f);
+            GameObject obj2 = new GameObject();
+            obj2.setImage("C:\\Users\\Danh\\Downloads\\Pokemon_Go.png");
+            obj2.position = new SFML.System.Vector2f(300, 0);
+            //gameEngine.registerObject(obj2);
 
             Player player = new Player();
             gameEngine.registerObject(player);
@@ -75,7 +90,7 @@ namespace EllixEngine
                 gameEngine.renderFrame();
                 gameEngine.getInput();
                 System.Threading.Thread.Sleep(17);
-                camera.position.X -= 1;
+                
             }
         }
     }
