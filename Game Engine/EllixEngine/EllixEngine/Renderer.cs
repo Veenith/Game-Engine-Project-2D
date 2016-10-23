@@ -61,18 +61,19 @@ namespace EllixEngine
             //window.Draw(drawImage());
             setWindowDimension(window);
             Vector2f halfSize = (Vector2f) screenSize / 2;
-            Sprite sprite = new Sprite();
             Vector2f halfSpriteSize;
             for(int i = 0; i < numObj; i++)
             {
                 if(objArray[i].Visible && objArray[i].ImageExists)
                 {
+                    Sprite sprite = new Sprite();
                     sprite.Texture = new Texture(objArray[i].Img);
                     sprite.Scale = multiplyVector(objArray[i].scale, resolutionScale);
                     halfSpriteSize = multiplyVector((Vector2f) sprite.Texture.Size / 2, objArray[i].scale);
-                    sprite.Position = multiplyVector(objArray[i].position - camera.position - halfSpriteSize, resolutionScale) +halfSize ;
+                    sprite.Position = multiplyVector(objArray[i].position - camera.position - halfSpriteSize, resolutionScale) +halfSize;
                     window.Draw(sprite);
                     sprite.Texture.Dispose();
+                    sprite.Dispose();
                 }
             }
             camera.internalUpdate();

@@ -11,7 +11,7 @@ namespace EllixEngine
     {
         public SFML.System.Vector2f position = new SFML.System.Vector2f(0, 0);
         public SFML.System.Vector2f scale = new SFML.System.Vector2f(1, 1);
-        public Image Img { get; private set; }
+        public Image Img { get; protected set; }
         public bool ImageExists { get; private set; }
         public bool Visible = true, Fixed = true, CompositeRender = false;
 
@@ -27,10 +27,37 @@ namespace EllixEngine
         }
 
         virtual public void update()
-        { }
+        {
+
+        }
+    }
+
+    class AnimatedGameObject : GameObject {
+        Image[] frames;
+        public void setAnimation(int width,int height,int numRows,int numColumns) {
+            int x = 0;
+            int y = 0;
+            int counter = 0;
+            frames = new Image[numRows * numColumns];
+            // i is vertical & j is horizontal
+            for (int i = 0; i < numRows; i++) {
+                for (int j = 0; j < numColumns; j++) {
+                    x = width * j;
+                    IntRect rect = new IntRect(x, y, width, height);
+                    frames[counter] = new Image((uint) width,(uint) height);
+                    frames[counter].Copy(Img, 0, 0, rect);
+                    counter += 1;
+                }
+                y += height;
+            }
+            Img = frames[0];
+        }
+        public void setFrame(int frameNum) {
+            Img = frames[frameNum];
+        }
     }
     
-    class Player:GameObject
+    class Player:AnimatedGameObject
     {
         public Player()
         {

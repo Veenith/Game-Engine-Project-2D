@@ -75,6 +75,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="keyInput.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="Renderer.cs" />
     <Compile Include="Ellix.cs" />

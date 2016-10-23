@@ -7,6 +7,7 @@ using SFML;
 using SFML.Graphics;
 using SFML.Window;
 
+
 namespace EllixEngine
 {
     class Ellix
@@ -21,16 +22,22 @@ namespace EllixEngine
             gameWindow.Closed += new EventHandler(OnClose);
             gameWindow.KeyPressed += new EventHandler<KeyEventArgs>(KeyPressed);
             gameWindow.Resized += new EventHandler<SizeEventArgs>(Resized);
+
         }
         //Input methods
         void KeyPressed(object sender, KeyEventArgs e)
         {
-            if (e.Code == Keyboard.Key.Escape) {
+            if (e.Code == Keyboard.Key.Escape)
+            {
                 gameWindow.Close();
             }
         }
-        
 
+        public keyInput getInput(Keyboard.Key key) {
+            return new keyInput(key, gameWindow);
+        }
+
+        
         public void Resized(object sender,SizeEventArgs resize)
         {
             gameWindow.SetView(new View(((SFML.System.Vector2f) gameWindow.Size) / 2,(SFML.System.Vector2f) gameWindow.Size));
@@ -72,23 +79,56 @@ namespace EllixEngine
             gameEngine.Init("Powered By Ellix",960,540);
 
             GameObject obj1 = new GameObject();
-            obj1.setImage("C:\\Users\\Danh\\Downloads\\Pokemon_Go.png");
+            obj1.setImage("C:\\Assets\\Pokemon_Go.png");
             gameEngine.registerObject(obj1);
             obj1.scale = new SFML.System.Vector2f(1f, 1f);
             GameObject obj2 = new GameObject();
-            obj2.setImage("C:\\Users\\Danh\\Downloads\\Pokemon_Go.png");
+            obj2.setImage("C:\\Assets\\Pokemon_Go.png");
             obj2.position = new SFML.System.Vector2f(300, 0);
-            //gameEngine.registerObject(obj2);
-
+            gameEngine.registerObject(obj2);
+           
             Player player = new Player();
+            player.setImage("C:\\Assets\\HorsePlayer.png");
+            player.setAnimation(400, 248, 3, 5);
             gameEngine.registerObject(player);
 
             PlayerCam camera = new PlayerCam(player);
             gameEngine.registerCamera(camera);
 
+            keyInput left = gameEngine.getInput(Keyboard.Key.A);
+            keyInput up = gameEngine.getInput(Keyboard.Key.W);
+            keyInput right = gameEngine.getInput(Keyboard.Key.D);
+            keyInput down = gameEngine.getInput(Keyboard.Key.S);
+            int frameCounter = 0;
+            int count = 0;
             while (gameEngine.checkWindowOpen()) {
                 gameEngine.renderFrame();
                 gameEngine.getInput();
+                count += 1;
+                if (frameCounter >= 15) {
+                    frameCounter = 0;
+                }
+                if (count == 0 || count == 3)
+                {
+                    player.setFrame(frameCounter);
+                    frameCounter++;
+                    count = 0;
+                }
+
+                if (left.keyDown())
+                {
+                    player.position.X -= 5;
+                }
+                if (up.keyDown()) {
+                    player.position.Y -= 5;
+                }
+                if (right.keyDown()) {
+                    player.position.X += 5;
+                }
+                if (down.keyDown())
+                {
+                    player.position.Y += 5;
+                }
                 System.Threading.Thread.Sleep(17);
                 
             }
