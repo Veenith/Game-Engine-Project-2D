@@ -25,3 +25,4 @@ C:\Danh\Software Developed\Game-Engine-Project-2D\Game Engine\EllixEngine\EllixE
 C:\Danh\Software Developed\Game-Engine-Project-2D\Game Engine\EllixEngine\EllixEngine\bin\x64\Debug\sfmlnet-system-2.dll
 C:\Danh\Software Developed\Game-Engine-Project-2D\Game Engine\EllixEngine\EllixEngine\bin\x64\Debug\sfmlnet-window-2.dll
 C:\Danh\Software Developed\Game-Engine-Project-2D\Game Engine\EllixEngine\EllixEngine\obj\x64\Debug\EllixEngine.csprojResolveAssemblyReference.cache
+D:\Data\Programming\Game project\Game-Engine-Project-2D\Game Engine\EllixEngine\EllixEngine\obj\x64\Debug\EllixEngine.csprojResolveAssemblyReference.cache

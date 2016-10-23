@@ -46,15 +46,37 @@ namespace EllixEngine
             gameWindow.DispatchEvents();
         }
 
+        public void registerObject(GameObject obj)
+        {
+            gameRender.registerObject(obj);
+        }
+
+        public void registerCamera(Camera cam)
+        {
+            gameRender.registerCamera(cam);
+        }
+
         static void Main(string[] args)
         {
             Ellix gameEngine = new Ellix();
             gameEngine.Init();
-            //while (gameEngine.checkWindowOpen()) {
+
+            GameObject obj1 = new GameObject();
+            obj1.setImage("D:\\Untitled.png");
+            gameEngine.registerObject(obj1);
+
+            Player player = new Player();
+            gameEngine.registerObject(player);
+
+            PlayerCam camera = new PlayerCam(player);
+            gameEngine.registerCamera(camera);
+
+            while (gameEngine.checkWindowOpen()) {
                 gameEngine.renderFrame();
                 gameEngine.getInput();
-            Console.ReadLine();
-            //}
+                System.Threading.Thread.Sleep(17);
+                camera.position.X -= 1;
+            }
         }
     }
 }
