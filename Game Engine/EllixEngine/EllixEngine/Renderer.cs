@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SFML.Graphics;
 using SFML.Window;
 using Vector2f = SFML.System.Vector2f;
@@ -15,14 +11,12 @@ namespace EllixEngine
         Vector2f referenceResolution = new Vector2f(1920, 1080);
         Vector2f resolutionScale;
         Color clearColor = Color.White;
-        GameObject[] objArray = new GameObject[100];
         GameObject camera;
-        int numObj = 0;
         Vector2u screenSize;
 
+        //Initialization
         public RenderWindow init(String windowTitle, uint ResWidth,uint ResHeight)
         {
-            
             RenderWindow window = new RenderWindow(new VideoMode(ResWidth,ResHeight), windowTitle, Styles.Default);
             return window;
         }
@@ -31,22 +25,14 @@ namespace EllixEngine
             clearColor = newColor;
         }
 
-        public void registerObject(GameObject obj)
-        {
-            objArray[numObj] = obj;
-            numObj++;
-        }
-
-        public void setWindowDimension(RenderWindow window) {
-            screenSize = window.Size;
-            resolutionScale = divideVector((Vector2f)screenSize, referenceResolution);
-        }
-
         public void registerCamera(Camera cam)
         {
             camera = cam;
         }
-        private Vector2f multiplyVector(Vector2f vector1, Vector2f vector2) {
+
+        //Vector math
+        private Vector2f multiplyVector(Vector2f vector1, Vector2f vector2)
+        {
             return new Vector2f(vector1.X * vector2.X, vector1.Y * vector2.Y);
         }
 
@@ -54,11 +40,18 @@ namespace EllixEngine
         {
             return new Vector2f(vector1.X / vector2.X, vector1.Y / vector2.Y);
         }
+        
+        //Function to check window dimension (called every frame)
+        public void setWindowDimension(RenderWindow window)
+        {
+            screenSize = window.Size;
+            resolutionScale = divideVector((Vector2f)screenSize, referenceResolution);
+        }
 
-        public void frame(RenderWindow window)
+        //Rendering function
+        public void frame(RenderWindow window, GameObject[] objArray, int numObj)
         {
             window.Clear(clearColor);
-            //window.Draw(drawImage());
             setWindowDimension(window);
             Vector2f halfSize = (Vector2f) screenSize / 2;
             Vector2f halfSpriteSize;
@@ -76,7 +69,6 @@ namespace EllixEngine
                     sprite.Dispose();
                 }
             }
-            camera.internalUpdate();
             window.Display();
         }
     }

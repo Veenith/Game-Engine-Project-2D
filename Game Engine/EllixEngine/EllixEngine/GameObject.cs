@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SFML.Graphics;
 
 namespace EllixEngine
@@ -15,18 +11,29 @@ namespace EllixEngine
         public bool ImageExists { get; private set; }
         public bool Visible = true, Fixed = true, CompositeRender = false;
 
+        //Physics
+        float xVelocity = 0, yVelocity = 0;
+        float xAcceleration = 0, yAcceleration = 0;
+        float colliderWidth = 0, colliderHeight = 0;
+        bool hasCollider = false;
+
         public void setImage(string path)
         {
             Img = new Image(path);
             ImageExists = true;
         }
 
-        virtual public void internalUpdate()
+        public void setupCollider()
         {
-            update();
+            if(ImageExists)
+            {
+                hasCollider = true;
+                colliderWidth = Img.Size.X * scale.X;
+                colliderHeight = Img.Size.Y * scale.Y;
+            }
         }
 
-        virtual public void update()
+        virtual public void update(Input input)
         {
 
         }
@@ -34,11 +41,18 @@ namespace EllixEngine
 
     class AnimatedGameObject : GameObject {
         Image[] frames;
-        public void setAnimation(int width,int height,int numRows,int numColumns) {
+        public bool shouldAnimate = true;
+        int cyclesPerFrame, numFrames;
+        int cycleCounter = 0, frameCounter = 0;
+
+        public void setAnimation(int width,int height,int numRows,int numColumns,int numFrames, int cycleCount = 1)
+        {
             int x = 0;
             int y = 0;
             int counter = 0;
-            frames = new Image[numRows * numColumns];
+            this.numFrames = numFrames;
+            cyclesPerFrame = cycleCount;
+            frames = new Image[numFrames];
             // i is vertical & j is horizontal
             for (int i = 0; i < numRows; i++) {
                 for (int j = 0; j < numColumns; j++) {
@@ -52,8 +66,31 @@ namespace EllixEngine
             }
             Img = frames[0];
         }
-        public void setFrame(int frameNum) {
+
+        public void setFrame(int frameNum)
+        {
             Img = frames[frameNum];
+        }
+
+        virtual public void animate()
+        {
+            if(cycleCounter >= cyclesPerFrame || cycleCounter == 0)
+            {
+                cycleCounter = 0;
+                setFrame(frameCounter);
+                frameCounter++;
+                if(frameCounter >= numFrames)
+                {
+                    frameCounter = 0;
+                }
+            }
+            cycleCounter++;
+        }
+
+        public override void update(Input input)
+        {
+            base.update(input);
+            animate();
         }
     }
     
@@ -85,10 +122,10 @@ namespace EllixEngine
             p1 = player;
         }
 
-        override public void internalUpdate()
+        override public void update(Input input)
         {
+            base.update(input);
             position = p1.position;
-            update();
         }
     }
 }

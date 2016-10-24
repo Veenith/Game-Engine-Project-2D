@@ -12,13 +12,16 @@ namespace EllixEngine
         bool initialPress = false;
         bool keyRelease = false;
         Keyboard.Key key;
-        public bool requireFocused = false;
+        public bool requireFocused;
         bool currentlyFocused = true;
         RenderWindow gameWindow;
+        public string name;
 
-        public keyInput(Keyboard.Key key,RenderWindow gameWindow) {
+        public keyInput(Keyboard.Key key,RenderWindow gameWindow, string name, bool requireFocused) {
+            this.requireFocused = requireFocused;
             this.gameWindow = gameWindow;
             this.key = key;
+            this.name = name;
         }
 
         private void update()
