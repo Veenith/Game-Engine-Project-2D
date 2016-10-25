@@ -5,12 +5,13 @@ namespace EllixEngine
 {
     class GameObject
     {
+
         public SFML.System.Vector2f position = new SFML.System.Vector2f(0, 0);
         public SFML.System.Vector2f scale = new SFML.System.Vector2f(1, 1);
         public Image Img { get; protected set; }
         public bool ImageExists { get; private set; }
         public bool Visible = true, Fixed = true, CompositeRender = false;
-        public int layer = 0;
+        public int layer = 0, arrayPos = 0;
 
         //Physics
         public bool hasCollider = false;

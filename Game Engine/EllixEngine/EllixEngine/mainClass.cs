@@ -12,22 +12,23 @@ namespace EllixEngine
             Ellix gameEngine = new Ellix();
             gameEngine.Init("Powered By Ellix", 960, 540);
 
+            gameEngine.registerLayers(3, 11000);
+
             //Create Objects
-            gameEngine.registerLayers(3, 1000);
+            MyPlayer player = new MyPlayer();
+            player.setImage("C:\\Assets\\HorsePlayer.png");
+            player.setAnimation(400, 248, 3, 5, 15, 4);
+            gameEngine.registerObject(player, 0);
+
             GameObject obj1 = new GameObject();
             obj1.setImage("C:\\Assets\\Pokemon_Go.png");
-            gameEngine.registerObject(obj1,2);
+            gameEngine.registerObject(obj1,0);
             obj1.scale = new SFML.System.Vector2f(1f, 1f);
 
             GameObject obj2 = new GameObject();
             obj2.setImage("C:\\Assets\\Pokemon_Go.png");
             obj2.position = new SFML.System.Vector2f(300, 0);
-            gameEngine.registerObject(obj2,0);
-
-            MyPlayer player = new MyPlayer();
-            player.setImage("C:\\Assets\\HorsePlayer.png");
-            player.setAnimation(400, 248, 3, 5, 15, 4);
-            gameEngine.registerObject(player,1);
+            gameEngine.registerObject(obj2, 0);
 
             PlayerCam camera = new PlayerCam(player);
             gameEngine.registerCamera(camera);
@@ -38,9 +39,7 @@ namespace EllixEngine
             gameEngine.registerInput(Keyboard.Key.D, "right");
             gameEngine.registerInput(Keyboard.Key.S, "down");
 
-            
             //Main loop
-            
             while (gameEngine.checkWindowOpen())
             {
                 
@@ -59,12 +58,10 @@ namespace EllixEngine
         public override void update(Input input)
         {
             base.update(input);
-            bool test = false;
             velocity.X = 0;
             if (input.keyDown("left"))
             {
                 velocity.X = -10;
-                test = true;
             }
 
             if (input.keyDown("right"))

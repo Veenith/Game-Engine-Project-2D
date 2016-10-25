@@ -112,8 +112,9 @@ namespace EllixEngine
         public void registerObject(GameObject obj, int layer = 0)
         {
             obj.layer = layer;
-            objArray[obj.layer,numObj[obj.layer]] = obj;
-            numObj[obj.layer]++;
+            obj.arrayPos = numObj[layer];
+            objArray[layer, numObj[layer]] = obj;
+            numObj[layer]++;
         }
 
         public void registerLayers(int numLayers, int layerSize)
@@ -129,6 +130,19 @@ namespace EllixEngine
             registerObject(cam);
         }
 
- 
+        //Deleting GameObject
+        public void deleteObject(ref GameObject obj)
+        {
+            removeFromArray(objArray, ref numObj[obj.layer], obj.layer, obj.arrayPos);
+            obj = null;
+        }
+
+        private void removeFromArray(GameObject[,] array, ref int numItems, int layer, int itemNumber)
+        {
+            numItems -= 1;
+            array[layer, itemNumber] = array[layer, numItems];
+            array[layer, numItems] = null;
+            array[layer, itemNumber].arrayPos = itemNumber;
+        }
     }
 }
