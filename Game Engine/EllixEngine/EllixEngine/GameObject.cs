@@ -10,12 +10,14 @@ namespace EllixEngine
         public Image Img { get; protected set; }
         public bool ImageExists { get; private set; }
         public bool Visible = true, Fixed = true, CompositeRender = false;
+        public int layer = 0;
 
         //Physics
-        float xVelocity = 0, yVelocity = 0;
-        float xAcceleration = 0, yAcceleration = 0;
+        public bool hasCollider = false;
+        public SFML.System.Vector2f velocity = new SFML.System.Vector2f(0, 0);
+        public SFML.System.Vector2f acceleration = new SFML.System.Vector2f(0, 0);
         float colliderWidth = 0, colliderHeight = 0;
-        bool hasCollider = false;
+
 
         public void setImage(string path)
         {

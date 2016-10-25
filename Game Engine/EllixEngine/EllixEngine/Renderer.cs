@@ -49,24 +49,27 @@ namespace EllixEngine
         }
 
         //Rendering function
-        public void frame(RenderWindow window, GameObject[] objArray, int numObj)
+        public void frame(RenderWindow window, GameObject[,] objArray, int[] numObj)
         {
             window.Clear(clearColor);
             setWindowDimension(window);
             Vector2f halfSize = (Vector2f) screenSize / 2;
             Vector2f halfSpriteSize;
-            for(int i = 0; i < numObj; i++)
+            for(int i = 0; i < numObj.Length; i++)
             {
-                if(objArray[i].Visible && objArray[i].ImageExists)
+                for (int j = 0; j < numObj[i]; j++)
                 {
-                    Sprite sprite = new Sprite();
-                    sprite.Texture = new Texture(objArray[i].Img);
-                    sprite.Scale = multiplyVector(objArray[i].scale, resolutionScale);
-                    halfSpriteSize = multiplyVector((Vector2f) sprite.Texture.Size / 2, objArray[i].scale);
-                    sprite.Position = multiplyVector(objArray[i].position - camera.position - halfSpriteSize, resolutionScale) +halfSize;
-                    window.Draw(sprite);
-                    sprite.Texture.Dispose();
-                    sprite.Dispose();
+                    if (objArray[i,j].Visible && objArray[i,j].ImageExists)
+                    {
+                        Sprite sprite = new Sprite();
+                        sprite.Texture = new Texture(objArray[i,j].Img);
+                        sprite.Scale = multiplyVector(objArray[i,j].scale, resolutionScale);
+                        halfSpriteSize = multiplyVector((Vector2f)sprite.Texture.Size / 2, objArray[i,j].scale);
+                        sprite.Position = multiplyVector(objArray[i,j].position - camera.position - halfSpriteSize, resolutionScale) + halfSize;
+                        window.Draw(sprite);
+                        sprite.Texture.Dispose();
+                        sprite.Dispose();
+                    }
                 }
             }
             window.Display();

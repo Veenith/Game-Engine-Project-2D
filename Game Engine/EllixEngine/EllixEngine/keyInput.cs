@@ -1,5 +1,4 @@
-﻿using System;
-using SFML.Window;
+﻿using SFML.Window;
 using SFML.Graphics;
 
 
@@ -81,7 +80,5 @@ namespace EllixEngine
             else
                 return keyHeld;
         }
-
-
     }
 }

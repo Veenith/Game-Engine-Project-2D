@@ -10,8 +10,11 @@ namespace EllixEngine
         Renderer gameRender;
         RenderWindow gameWindow;
         Input input = new Input();
-        GameObject[] objArray = new GameObject[100];
-        int numObj = 0;
+        GameObject[,] objArray;
+        int[] numObj;
+        bool[][] layerInteraction;
+        Physics physicsEngine;
+           
         
         //Initialization
         public void Init(String windowTitle,uint ResWidth,uint ResHeight)
@@ -22,10 +25,10 @@ namespace EllixEngine
             gameWindow.Closed += new EventHandler(OnClose);
             gameWindow.KeyPressed += new EventHandler<KeyEventArgs>(KeyPressed);
             gameWindow.Resized += new EventHandler<SizeEventArgs>(Resized);
-
+            physicsEngine = new Physics();
         }
 
-        //Input methods
+        //Escape Method For Debug Purposes
         void KeyPressed(object sender, KeyEventArgs e)
         {
             if (e.Code == Keyboard.Key.Escape)
@@ -33,18 +36,21 @@ namespace EllixEngine
                 gameWindow.Close();
             }
         }
-        
+
+        //Resizing
         public void Resized(object sender,SizeEventArgs resize)
         {
             gameWindow.SetView(new View(((SFML.System.Vector2f) gameWindow.Size) / 2,(SFML.System.Vector2f) gameWindow.Size));
         }
 
+        //X closes window
         void OnClose(object sender, EventArgs e)
         {
             // Close the window when OnClose event is received
             RenderWindow window = (RenderWindow)sender;
             window.Close();
         }
+
 
         public void registerInput(Keyboard.Key key, string name, bool requireFocus = true)
         {
@@ -57,29 +63,64 @@ namespace EllixEngine
             return gameWindow.IsOpen;
         }
 
-        //GameEngine Methods
+        //GameEngine update method
         public void update()
         {
-            for(int i = 0; i < numObj; i++)
+            for(int i = 0; i < numObj.Length; i++)
             {
-                objArray[i].update(input);
+                for (int j = 0; j < numObj[i]; j++) {
+                    objArray[i, j].update(input);
+                }
             }
         }
 
+
+        //Rendering
         public void renderFrame()
         {
             gameRender.frame(gameWindow, objArray, numObj);
         }
 
+        //Event Polling
         public void getInput()
         {
             gameWindow.DispatchEvents();
         }
 
-        public void registerObject(GameObject obj)
+        //setting layer Collision
+        private void layerCollision(int numLayers) {
+            layerInteraction = new bool[numLayers][];
+            for (int i = 0; i < numLayers; i++) {
+                layerInteraction[i] = new bool[i+1];
+                for (int j = 0; j <= i; j++)
+                {
+                    layerInteraction[i][j] = true;
+                }
+            }
+        }   
+
+        public void setLayerCollision(int layerA, int layerB, bool shouldCollide) {
+            layerInteraction[layerA][layerB] = shouldCollide;
+        }
+
+        //Calling physics engine
+        public void  applyPhysics() {
+            physicsEngine.updatePhysics(objArray,numObj);
+        }
+
+        //Registering Objects
+        public void registerObject(GameObject obj, int layer = 0)
         {
-            objArray[numObj] = obj;
-            numObj++;
+            obj.layer = layer;
+            objArray[obj.layer,numObj[obj.layer]] = obj;
+            numObj[obj.layer]++;
+        }
+
+        public void registerLayers(int numLayers, int layerSize)
+        {
+            numObj = new int[numLayers];
+            objArray = new GameObject[numLayers, layerSize];
+            layerCollision(numLayers);
         }
 
         public void registerCamera(Camera cam)
@@ -88,7 +129,6 @@ namespace EllixEngine
             registerObject(cam);
         }
 
-
-        
+ 
     }
 }
