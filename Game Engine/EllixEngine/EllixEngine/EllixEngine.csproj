@@ -75,6 +75,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Chunk.cs" />
     <Compile Include="Input.cs" />
     <Compile Include="keyInput.cs" />
     <Compile Include="GameObject.cs" />

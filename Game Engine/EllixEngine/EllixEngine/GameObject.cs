@@ -27,6 +27,12 @@ namespace EllixEngine
             ImageExists = true;
         }
 
+        public void setImage(Image image)
+        {
+            Img = image;
+            ImageExists = true;
+        }
+
         public void setupCollider()
         {
             if(ImageExists)
