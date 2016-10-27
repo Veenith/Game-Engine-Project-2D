@@ -17,7 +17,8 @@ namespace EllixEngine
         public bool hasCollider = false;
         public SFML.System.Vector2f velocity = new SFML.System.Vector2f(0, 0);
         public SFML.System.Vector2f acceleration = new SFML.System.Vector2f(0, 0);
-        float colliderWidth = 0, colliderHeight = 0;
+        public float colliderWidth = 0, colliderHeight = 0;
+        public bool applyGravity = false;
 
 
         public void setImage(string path)
@@ -31,8 +32,8 @@ namespace EllixEngine
             if(ImageExists)
             {
                 hasCollider = true;
-                colliderWidth = Img.Size.X * scale.X;
-                colliderHeight = Img.Size.Y * scale.Y;
+                colliderWidth = (Img.Size.X * scale.X)/2;
+                colliderHeight = (Img.Size.Y * scale.Y)/2;
             }
         }
 
@@ -68,6 +69,7 @@ namespace EllixEngine
                 y += height;
             }
             Img = frames[0];
+            setupCollider();
         }
 
         public void setFrame(int frameNum)

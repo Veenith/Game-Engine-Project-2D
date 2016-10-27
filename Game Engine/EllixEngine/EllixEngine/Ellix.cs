@@ -14,8 +14,7 @@ namespace EllixEngine
         int[] numObj;
         bool[][] layerInteraction;
         Physics physicsEngine;
-           
-        
+
         //Initialization
         public void Init(String windowTitle,uint ResWidth,uint ResHeight)
         {
@@ -106,6 +105,10 @@ namespace EllixEngine
         //Calling physics engine
         public void  applyPhysics() {
             physicsEngine.updatePhysics(objArray,numObj);
+        }
+
+        public Physics getPhysicsEngine() {
+            return physicsEngine;
         }
 
         //Registering Objects

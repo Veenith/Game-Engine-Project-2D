@@ -12,23 +12,36 @@ namespace EllixEngine
             Ellix gameEngine = new Ellix();
             gameEngine.Init("Powered By Ellix", 960, 540);
 
-            gameEngine.registerLayers(3, 11000);
+            gameEngine.registerLayers(5, 11000);
 
             //Create Objects
             MyPlayer player = new MyPlayer();
-            player.setImage("C:\\Assets\\HorsePlayer.png");
-            player.setAnimation(400, 248, 3, 5, 15, 4);
-            gameEngine.registerObject(player, 0);
+            player.setImage("C:\\Assets\\squareblack.png");
+            player.position.X = -400;
+            player.setupCollider();
+            player.setAnimation(30,30,1,1,1,1);
+            gameEngine.registerObject(player,3);
 
-            GameObject obj1 = new GameObject();
-            obj1.setImage("C:\\Assets\\Pokemon_Go.png");
-            gameEngine.registerObject(obj1,0);
-            obj1.scale = new SFML.System.Vector2f(1f, 1f);
+            GameObject obj = new GameObject();
+            obj.position.X = 60;
+            obj.position.Y = -30;
+            obj.setImage("C:\\Assets\\square.png");
+            obj.setupCollider();
+            gameEngine.registerObject(obj);
 
-            GameObject obj2 = new GameObject();
-            obj2.setImage("C:\\Assets\\Pokemon_Go.png");
-            obj2.position = new SFML.System.Vector2f(300, 0);
-            gameEngine.registerObject(obj2, 0);
+            GameObject[] gameObj = new GameObject[40];
+            for (int i = 0; i < 40; i++)
+            {
+                GameObject obj1 = new GameObject();
+                gameObj[i] = obj1;
+                obj1.setImage("C:\\Assets\\square.png");
+                gameEngine.registerObject(obj1, 4);
+                obj1.position.X = (30 * i);
+                obj1.setupCollider();
+                obj1.scale = new SFML.System.Vector2f(1f, 1f);
+            }
+
+            
 
             PlayerCam camera = new PlayerCam(player);
             gameEngine.registerCamera(camera);
@@ -38,15 +51,25 @@ namespace EllixEngine
             gameEngine.registerInput(Keyboard.Key.W, "up");
             gameEngine.registerInput(Keyboard.Key.D, "right");
             gameEngine.registerInput(Keyboard.Key.S, "down");
+            gameEngine.registerInput(Keyboard.Key.Space,"jump");
+
+            Physics physicEngine = gameEngine.getPhysicsEngine();
 
             //Main loop
             while (gameEngine.checkWindowOpen())
             {
-                
-                gameEngine.renderFrame();
-                gameEngine.update();
                 gameEngine.getInput();
                 gameEngine.applyPhysics();
+                for (int i = 0; i < 40; i++)
+                    physicEngine.collisionDetection(player,gameObj[i]);
+                physicEngine.collisionDetection(player, obj);
+                physicEngine.applyCollision(player);
+                for (int i = 0; i < 40; i++)
+                    physicEngine.collisionDetection(player, gameObj[i]);
+                physicEngine.collisionDetection(player, obj);
+                physicEngine.applyCollision(player);
+                gameEngine.update();
+                gameEngine.renderFrame();
 
                 System.Threading.Thread.Sleep(17);
             }
@@ -59,23 +82,25 @@ namespace EllixEngine
         {
             base.update(input);
             velocity.X = 0;
+            velocity.Y = 0;
+          
             if (input.keyDown("left"))
             {
-                velocity.X = -10;
+                velocity.X = -3;
             }
 
             if (input.keyDown("right"))
             {
-                velocity.X = 10;
+                velocity.X = 3;
             }
 
             if (input.keyDown("up"))
             {
-                position.Y -= 5;
+                velocity.Y = -3;
             }
             if (input.keyDown("down"))
             {
-                position.Y += 5;
+                velocity.Y = 3;
             }
         }
     }
