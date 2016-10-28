@@ -16,12 +16,13 @@ namespace EllixEngine
 
             //Create Objects
             MyPlayer player = new MyPlayer();
-            player.setImage("C:\\Assets\\squareblack.png");
+            player.setImage("player.png");
             player.position.X = -400;
             player.setupCollider();
             player.setAnimation(30,30,1,1,1,1);
             gameEngine.registerObject(player,3);
 
+            /*
             GameObject obj = new GameObject();
             obj.position.X = 60;
             obj.position.Y = -30;
@@ -29,6 +30,7 @@ namespace EllixEngine
             obj.setupCollider();
             gameEngine.registerObject(obj);
 
+            
             GameObject[] gameObj = new GameObject[40];
             for (int i = 0; i < 40; i++)
             {
@@ -39,9 +41,10 @@ namespace EllixEngine
                 obj1.position.X = (30 * i);
                 obj1.setupCollider();
                 obj1.scale = new SFML.System.Vector2f(1f, 1f);
-            }
+            }*/
 
-            
+            Chunk chunk1 = new Chunk(0, 450);
+            chunk1.create("block.png", 1, gameEngine, 4);
 
             PlayerCam camera = new PlayerCam(player);
             gameEngine.registerCamera(camera);
@@ -60,6 +63,7 @@ namespace EllixEngine
             {
                 gameEngine.getInput();
                 gameEngine.applyPhysics();
+                /*
                 for (int i = 0; i < 40; i++)
                     physicEngine.collisionDetection(player,gameObj[i]);
                 physicEngine.collisionDetection(player, obj);
@@ -68,6 +72,8 @@ namespace EllixEngine
                     physicEngine.collisionDetection(player, gameObj[i]);
                 physicEngine.collisionDetection(player, obj);
                 physicEngine.applyCollision(player);
+                */
+                chunk1.checkCollisionInChunk(player, ref physicEngine);
                 gameEngine.update();
                 gameEngine.renderFrame();
 
