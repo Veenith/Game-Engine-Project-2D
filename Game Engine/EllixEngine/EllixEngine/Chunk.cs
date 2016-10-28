@@ -29,8 +29,8 @@ namespace EllixEngine
             terrain = new GameObject[chunkSize, chunkSize];
 
             terrainComposite = new GameObject();
-            terrainComposite.position.X = x;
-            terrainComposite.position.Y = y;
+            terrainComposite.position.X = x + (chunkSize - 1) * blockSize / 2;
+            terrainComposite.position.Y = y + (chunkSize - 1) * blockSize / 2;
             terrainComposite.setImage(new Image((uint)(chunkSize * blockSize), (uint)(chunkSize * blockSize), Color.Transparent));
 
             for (int i = 0; i < chunkSize; i++)
@@ -45,6 +45,7 @@ namespace EllixEngine
                         terrain[i, j].position.X = x + i * blockSize;
                         terrain[i, j].position.Y = y + j * blockSize;
                         terrainComposite.Img.Copy(terrain[i, j].Img, (uint)(i * blockSize), (uint)(j * blockSize));
+                        //gameEngine.registerObject(terrain[i, j]);
                     }
                 }
             }
@@ -52,9 +53,9 @@ namespace EllixEngine
             gameEngine.registerObject(terrainComposite, layer);
         }
 
-        public void checkCollisionInChunk(GameObject obj, ref Physics physicsEngine)
+        public void checkCollisionInChunk(GameObject obj, Physics physicsEngine)
         {
-            float distanceThreshold = 70;
+            //float distanceThreshold = 70;
             for (int i = 0; i < chunkSize; i++)
                 for(int j = 0; j < chunkSize; j++)
                     if(terrain[i,j] != null)

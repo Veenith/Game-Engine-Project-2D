@@ -56,7 +56,6 @@ namespace EllixEngine
 
             if (Math.Abs(dx) < halfWidth && Math.Abs(dy) < halfHeight)
             {
-                Console.WriteLine("Collision");
                 collisionArray[numCollision] = new Collision();
                 float wy = halfWidth * dy;
                 float hx = halfHeight * dx;

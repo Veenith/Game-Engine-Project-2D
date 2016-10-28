@@ -73,7 +73,8 @@ namespace EllixEngine
                 physicEngine.collisionDetection(player, obj);
                 physicEngine.applyCollision(player);
                 */
-                chunk1.checkCollisionInChunk(player, ref physicEngine);
+                chunk1.checkCollisionInChunk(player, physicEngine);
+                chunk1.checkCollisionInChunk(player, physicEngine);
                 gameEngine.update();
                 gameEngine.renderFrame();
 
